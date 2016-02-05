@@ -47,7 +47,12 @@ class Case
 	# === Principe
 	# retourne l'egalité entre l'etat de la case et son etat final
 	def estCorrecte?()
-		return @etat == @etatFinal
+		if(@etatFinal == 1)
+			r = @etatFinal == @etat
+		else
+			r = @etat != 1
+		
+		return r 
 	end
 	
 	
