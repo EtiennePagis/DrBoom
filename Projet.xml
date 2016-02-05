@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROJET NOM="Projet" TYPE="Ruby">
+  <FICHIER>Vue.rb</FICHIER>
+  <FICHIER>VueCase.rb</FICHIER>
+  <FICHIER>ControleurPartie.rb</FICHIER>
+  <FICHIER>Controleur.rb</FICHIER>
+  <FICHIER>Timer.rb</FICHIER>
+  <FICHIER>Case.rb</FICHIER>
+  <FICHIER>Grille.rb</FICHIER>
+</PROJET>
+
