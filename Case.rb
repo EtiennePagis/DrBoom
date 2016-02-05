@@ -1,6 +1,6 @@
-# encoding: UTF-8
-
 #GAUTIER Antoine
+
+# encoding: UTF-8
 
 class Case
 	@etat
@@ -22,7 +22,7 @@ class Case
 	# +etatFinal à 0
 	def initialize()
 		@etat = 0
-		@etatFinal = Random.rand(2)
+		@etatFinal = 0
 		
 	end
 		

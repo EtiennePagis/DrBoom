@@ -32,7 +32,8 @@ class Grille
 	attr_accessor :nbLigne
 	attr_accessor :nbCol
 	
-	def Grille.Creer(x)
+	private_class_method :new
+	def Grille.creer(x)
 		new(x)
 	end
 
@@ -48,6 +49,7 @@ class Grille
 		for i in (0..self.nbLigne-1) do
 			for j in (0..self.nbCol-1) do
 				@matrice[i][j] = Case.new() 
+				@matrice[i][j].etatFinal = Random.rand(2)
 			end
 		end
 	end
@@ -62,7 +64,7 @@ class Grille
 		self.ini()
 	end
 
-
+	
 	
 	def afficherGrilleSolu()
 		#Change l'affichage de la grille contenant la solution
@@ -181,7 +183,7 @@ class Grille
 					
 end
 
-grille = Grille.Creer(5)
+grille = Grille.creer(5)
 grille.indice()
 grille.afficherGrilleJeu()
 grille.afficherGrilleSolu()
