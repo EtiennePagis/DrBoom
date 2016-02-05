@@ -32,12 +32,20 @@ class Grille
 	attr_accessor :nbLigne
 	attr_accessor :nbCol
 	
-	private_class_method :new
-	def Grille.creer(x)
+	def Grille.Creer(x)
 		new(x)
 	end
 
-
+def initialize(x)
+	#Initialisation des variables de la grille
+		@matrice = Array.new(x){Array.new(x)}
+		@pile_indice_ver = Array.new()
+		@pile_indice_hor = Array.new()
+		@nbLigne = x
+		@nbCol = x
+		self.ini()
+	end
+	
 	def ini()
 	#Initialisation de toutes les valeurs de la grille a 0
 		self.definirSolutionAlea()
@@ -49,22 +57,9 @@ class Grille
 		for i in (0..self.nbLigne-1) do
 			for j in (0..self.nbCol-1) do
 				@matrice[i][j] = Case.new() 
-				@matrice[i][j].etatFinal = Random.rand(2)
 			end
 		end
 	end
-	
-	def initialize(x)
-	#Initialisation des variables de la grille
-		@matrice = Array.new(x){Array.new(x)}
-		@pile_indice_ver = Array.new()
-		@pile_indice_hor = Array.new()
-		@nbLigne = x
-		@nbCol = x
-		self.ini()
-	end
-
-	
 	
 	def afficherGrilleSolu()
 		#Change l'affichage de la grille contenant la solution
@@ -173,7 +168,7 @@ class Grille
 		#On verifie donc que toutes les cases remplies sont celles qui doivent etre rempli
 		0.upto(@nbCol-1){ |i|
 			0.upto(@nbLigne -1) { |j|
-				if(@matrice[i][j].etat != @matrice[i][j].etatFinal) then
+				if(!@matrice[i][j].estCorrecte?) then
 					return false
 				end
 			}
@@ -182,8 +177,3 @@ class Grille
 	end
 					
 end
-
-grille = Grille.creer(5)
-grille.indice()
-grille.afficherGrilleJeu()
-grille.afficherGrilleSolu()

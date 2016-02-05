@@ -1,6 +1,6 @@
-#GAUTIER Antoine
-
 # encoding: UTF-8
+
+#GAUTIER Antoine
 
 class Case
 	@etat
@@ -22,8 +22,7 @@ class Case
 	# +etatFinal à 0
 	def initialize()
 		@etat = 0
-		@etatFinal = 0
-		
+		@etatFinal = Random.rand(2)		
 	end
 		
 	# === Principe
@@ -47,13 +46,11 @@ class Case
 	# === Principe
 	# retourne l'egalité entre l'etat de la case et son etat final
 	def estCorrecte?()
-		if(@etatFinal == 1)
+		if(@etatFinal == 1) then
 			r = @etatFinal == @etat
 		else
 			r = @etat != 1
-		
-		return r 
+		end
+		return r
 	end
-	
-	
 end

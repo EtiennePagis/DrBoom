@@ -51,6 +51,8 @@ class VueCase < Gtk::EventBox
 			@image = Gtk::Image.new("./caseblanche.jpg")
 		elsif uneCouleur == "casenoire"
 			@image = Gtk::Image.new("./casenoire.jpg")
+		elsif uneCouleur == "croix"
+			@image = Gtk::Image.new("./croix.png")
 		end
 	end
 	

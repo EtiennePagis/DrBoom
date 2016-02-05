@@ -6,7 +6,8 @@
 #
 
 load 'Controleur.rb'
-load 'Vue.rb'
+load 'Grille.rb'
+load 'VueGrille.rb'
 require 'gtk2'
 
 class ControleurPartie < Controleur
@@ -15,31 +16,36 @@ class ControleurPartie < Controleur
 	@@hypo = false
 	@@compteur = 0
 	@image = Gtk::Image.new("./modeon.png")
+	@uneVue
+
+	attr_reader :uneVue
 	
-	def ControleurPartie.Creer(uneTaille)
-		new(uneTaille)
+	def ControleurPartie.Creer(uneGrille)
+		new(uneGrille)
 	end
 
-	def initialize(uneTaille)
+	def initialize(uneGrille)
 
-		@uneVue = VueGrille.Creer(uneTaille)
+		@uneVue = VueGrille.Creer(uneGrille)
 		@uneVue.table.each do |uneCase|
 			uneCase.signal_connect("button_press_event") do
 				Gdk::Display.default.pointer_ungrab(Gdk::Event::CURRENT_TIME)
-				uneCase.signal_connect("button_release_event") do
-					Gdk::Display.default.pointer_ungrab(Gdk::Event::CURRENT_TIME)
-					if @@hypo==true then
-						@@compteur += 1
-					end
-					print(@@compteur)
-					@@pile.push(uneCase)
-					@uneVue.actualiserCase(uneCase.i, uneCase.j)
+				if(@uneVue.grille.verifJeu) then
+					Gtk.main_quit
 				end
-			end		
-				
-			#uneCase.signal_connect("enter-notify-event") do |macase, event|
-				
-			#end
+			end
+			
+			uneCase.signal_connect("button_release_event") do
+				Gdk::Display.default.pointer_ungrab(Gdk::Event::CURRENT_TIME)
+				if @@hypo==true then
+					@@compteur += 1
+				end
+				print(@uneVue.grille.matrice[uneCase.i][uneCase.j].etat)
+				@@pile.push(uneCase)
+				@uneVue.actualiserCase(uneCase.i, uneCase.j)
+				@uneVue.grille.verifJeu
+			end	
+		
 		end
 
 		@uneVue.quitter.signal_connect('clicked'){
@@ -79,7 +85,8 @@ class ControleurPartie < Controleur
 		
 
 Gtk.init
-jeu = ControleurPartie.Creer(10)
+jeu = ControleurPartie.Creer(Grille.Creer(5))
+jeu.uneVue.grille.afficherGrilleSolu()
 Gtk.main
 
 end 
